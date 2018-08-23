@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.demo.dao.UsrDao">
+	<select id="queryUsr" resultType="com.imooc.demo.entity.Usr">
+		SELECT Id,
+	    user_id,
+	    usr_name,
+	    Usr_password
+		FROM user_info
+	</select>
+	<select id="queryUsrByName" resultType="com.imooc.demo.entity.Usr">
+		SELECT Id,
+	    user_id,
+	    usr_name,
+	    Usr_password
+		FROM user_info
+		WHERE
+		usr_name=#{usrName}
+	</select>
+	<insert id="insertUsr" useGeneratedKeys="true" keyProperty="Id"
+		keyColumn="Id" parameterType="com.imooc.demo.entity.Usr">
+		INSERT INTO
+		tb_area(area_name,priority,
+		creat_time,last_edit_time)
+		VALUES
+		(#{areaName},#{priority},
+		#{createTime},#{lastEditTime})
+	</insert>
+	<update id="updateArea" parameterType="com.imooc.demo.entity.Area">
+		update tb_area
+		<set>
+			<if test="areaName != null">area_name=#{areaName},</if>
+			<if test="priority != null">priority=#{priority},</if>
+			<if test="lastEditTime != null">last_edit_time=#{lastEditTime}</if>
+		</set>
+		where area_id=#{areaId}
+	</update>
+	<delete id="deleteArea">
+		DELETE FROM
+		tb_area
+		WHERE
+		area_id =
+		#{areaId}
+	</delete>
+</mapper>
+    
